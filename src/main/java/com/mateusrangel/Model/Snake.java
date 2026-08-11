@@ -23,8 +23,5 @@ public class Snake {
     public void resetSnake(Point initialPoint, int initialLenght, Direction initialDirection){
         this.snakeBody.clear(); 
 
-}
-
-    
-
+    }
 }
