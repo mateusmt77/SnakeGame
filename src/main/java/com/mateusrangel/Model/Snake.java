@@ -8,9 +8,12 @@ public class Snake {
     LinkedList<Point> snakeBody = new LinkedList<>(); 
     Direction currentlyDirection; 
     Direction nextDirection; 
-    private final int INITIAL_LENGHT = 3;   
     public int pedingGrowth; 
 
+    // contants 
+    private final int INITIAL_LENGHT = 3; 
+    private static final Direction INITIALSNAKEDIRECTION = Direction.RIGHT; 
+    
     // initial position 
     private int startPointX; // Largura total da tela / 2 
     private int startPointY; // Altura total da tela / 2 
@@ -22,6 +25,13 @@ public class Snake {
     // reset creator (snake) 
     public void resetSnake(Point initialPoint, int initialLenght, Direction initialDirection){
         this.snakeBody.clear(); 
+        this.pedingGrowth = 0; 
+
+        this.currentlyDirection = INITIALSNAKEDIRECTION;
+        this.nextDirection = INITIALSNAKEDIRECTION;  
+
+        
+
 
     }
 }
