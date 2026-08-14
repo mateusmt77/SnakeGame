@@ -20,7 +20,9 @@ public class Snake {
     Point startPointSnake = new Point(startPointX, startPointY); // center of the screen 
 
     // snake constructor 
-    public Snake(Point initialPoint, int initialLenght, Direction initialDirection){} 
+    public Snake(Point initialPoint, int initialLenght, Direction initialDirection){
+        resetSnake(initialPoint, initialLenght, initialDirection); 
+    } 
 
     // reset creator (snake) 
     public void resetSnake(Point initialPoint, int initialLenght, Direction initialDirection){
@@ -30,8 +32,37 @@ public class Snake {
         this.currentlyDirection = INITIALSNAKEDIRECTION;
         this.nextDirection = INITIALSNAKEDIRECTION;  
 
-        
+        int opossiteDX = -initialDirection.getDx();  
+        int opossiteDY = -initialDirection.getDy();  
 
+        for (int i = 0; i < INITIAL_LENGHT; i++) { // criando o corpo inicial da snake 
+            int indiceX = initialPoint.x() + (opossiteDX * i);
+            int indiceY = initialPoint.y() + (opossiteDY * i);  
 
+            this.snakeBody.addLast(new Point(indiceX, indiceY));  
+        }
+    }
+
+    public void setNextDirection(Direction newDirectionInput){
+        boolean ehOposta = newDirectionInput.isOpposite(currentlyDirection);
+        if(!ehOposta){
+            this.nextDirection = newDirectionInput; 
+        }
+    }
+
+    public void moveSnake(){
+        this.currentlyDirection = nextDirection;
+
+        int novaPosicaoX = snakeBody.getFirst().x() + currentlyDirection.getDx();
+        int novaPosicaoY = snakeBody.getFirst().y() + currentlyDirection.getDy(); 
+
+        this.snakeBody.addFirst(new Point(novaPosicaoX, novaPosicaoY));
+        boolean temComida = pedingGrowth > 0;   
+
+        if(temComida){
+            pedingGrowth --;
+        } else {
+            this.snakeBody.removeLast();  
+        }
     }
 }
