@@ -36,13 +36,13 @@
   - [ ] Point getHead() — retorna corpoCobra.getFirst().
   - [ ] List<Point> getBody() — retorna corpoCobra (ou uma cópia imutável via List.copyOf para encapsulamento).
   - [ ] int getLength() — corpoCobra.size().
-  - [ ] boolean occupies(Point p) — útil para Food não spawnar em cima da cobra.
+  - [ ] boolean occupies(Point p) — útil para Food não spawnar em cima da cobra. 
 
   6. Reset / reinício
 
   - [ ] Método reset(Point start, int initialLength, Direction initialDirection) para reiniciar a cobra após Game Over,
   sem precisar recriar a instância.
-  - [ ] Limpar pendingGrowth no reset.
+  - [ ] Limpar pendingGrowth no reset. 
 
   7. Robustez e qualidade
 
@@ -59,5 +59,5 @@
   - [ ] Criar SnakeTest (JUnit 5) cobrindo:
     - movimento básico e crescimento;
     - bloqueio de reversão 180°;
-    - detecção de colisão com parede e consigo mesma;
+    - detecção de colisão com parede e consigo mesma; 
     - reset.
