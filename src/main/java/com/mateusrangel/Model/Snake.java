@@ -50,7 +50,7 @@ public class Snake {
     public void moveSnake() {
         this.currentlyDirection = nextDirection;
 
-        int novaPosicaoX = snakeBody.getFirst().x() + currentlyDirection.getDx();
+        int novaPosicaoX = snakeBody.getFirst().x() + currentlyDirection.getDx(); 
         int novaPosicaoY = snakeBody.getFirst().y() + currentlyDirection.getDy();
 
         this.snakeBody.addFirst(new Point(novaPosicaoX, novaPosicaoY));
