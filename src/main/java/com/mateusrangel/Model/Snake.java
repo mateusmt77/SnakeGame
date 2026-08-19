@@ -9,16 +9,16 @@ public class Snake {
     // body config
     private LinkedList<Point> snakeBody = new LinkedList<>();
     private Direction currentlyDirection;
-    private Direction nextDirection; 
-    private int pedingGrowth; 
-
+    private Direction nextDirection;
+    private int pedingGrowth;
+    
     // contants 
     private final int INITIAL_LENGHT = 3;
     private static final Direction INITIALSNAKEDIRECTION = Direction.RIGHT;
 
     // snake constructor 
     public Snake(Point initialPoint, int initialLenght) {
-        resetSnake(initialPoint, initialLenght);  
+        resetSnake(initialPoint, initialLenght);
     }
 
     // reset creator (snake) 
@@ -47,50 +47,53 @@ public class Snake {
         }
     }
 
+    public void growSize() {
+        this.pedingGrowth++;
+    }
+
     public void moveSnake() {
         this.currentlyDirection = nextDirection;
+        this.snakeBody.addFirst(snakeBody.getFirst().translate(currentlyDirection));
 
-        int novaPosicaoX = snakeBody.getFirst().x() + currentlyDirection.getDx(); 
-        int novaPosicaoY = snakeBody.getFirst().y() + currentlyDirection.getDy();
-
-        this.snakeBody.addFirst(new Point(novaPosicaoX, novaPosicaoY));
-        boolean temComida = pedingGrowth > 0;
-
-        if (temComida) {
+        if (pedingGrowth > 0) {
             pedingGrowth--;
         } else {
             this.snakeBody.removeLast();
         }
     }
 
+    // get methods
     private Point getHeadSnake() {
-        return snakeBody.getFirst(); 
-    }
-    
-    public List<Point> getSnakeBody() {
-        List<Point> snakeBodyDTO = new LinkedList<>(snakeBody);
-        return Collections.unmodifiableList(snakeBodyDTO);
-    }
-    
-    public int getSnakeLength() {
-        return this.snakeBody.size();
-    }
-    
-    public boolean pointOccupingSnakeBody(Point point) {
-        return this.snakeBody.contains(point); 
+        return snakeBody.getFirst();
     }
 
+    public int getInititalLenght() {
+        return this.INITIAL_LENGHT; 
+    }
+
+    public List<Point> getSnakeBody() {
+        return Collections.unmodifiableList(new LinkedList<>(snakeBody));
+    }
+
+    public int getSnakeLength() {
+        return snakeBody.size();
+    }
+
+    public boolean pointOccupingSnakeBody(Point point) {
+        return snakeBody.contains(point);
+    }
+
+    // collisions verifiers 
     public boolean selfCollision() {
-        return snakeBody.stream().skip(1).anyMatch(pedaco -> pedaco.equals(getHeadSnake())); 
+        return snakeBody.stream().skip(1).anyMatch(pedaco -> pedaco.equals(getHeadSnake()));
     }
 
     public boolean collisionWithWall(int widthScreen, int heightScreen) {
         return getHeadSnake().x() < 0 || getHeadSnake().x() >= widthScreen
-                || getHeadSnake().y() < 0 || getHeadSnake().y() >= heightScreen; 
+                || getHeadSnake().y() < 0 || getHeadSnake().y() >= heightScreen;
     }
 
     public boolean isSnakeDead(int width, int height) {
         return selfCollision() || collisionWithWall(width, height);
     }
-
 }
