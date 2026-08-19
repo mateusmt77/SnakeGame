@@ -28,17 +28,6 @@ public enum Direction {
         return this.dx + other.dx == 0 && this.dy + other.dy == 0;
     }
 
-    @Override
-    public String toString() { 
-        switch (this) {
-            case UP: return "Cima";  
-            case DOWN: return "Baixo";
-            case LEFT: return "Esquerda";
-            case RIGHT: return "Direita";
-            default: return this.name();  
-        }
-    }
-
     public Optional<Direction> keyboardChar(char inputKeyboard) {
         char enterUpper = Character.toUpperCase(inputKeyboard);
         switch (enterUpper) {
