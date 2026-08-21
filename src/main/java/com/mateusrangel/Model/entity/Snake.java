@@ -19,12 +19,12 @@ public class Snake {
     private static final Direction INITIALSNAKEDIRECTION = Direction.RIGHT;
 
     // snake constructor 
-    public Snake(Point initialPoint, int initialLenght) {
-        resetSnake(initialPoint, initialLenght);
+    public Snake(Point initialPoint) {
+        resetSnake(initialPoint);
     }
 
     // reset creator (snake) 
-    public void resetSnake(Point initialPoint, int initialLenght) {
+    public void resetSnake(Point initialPoint) {
         this.snakeBody.clear();
         this.pedingGrowth = 0;
 
@@ -32,13 +32,13 @@ public class Snake {
         this.nextDirection = INITIALSNAKEDIRECTION;
 
         int oppositeDX = -INITIALSNAKEDIRECTION.getDx();
-        int oppositeDY = -INITIALSNAKEDIRECTION.getDy();
+        int oppositeDY = -INITIALSNAKEDIRECTION.getDy(); 
 
         for (int i = 0; i < INITIAL_LENGHT; i++) { // criando o corpo inicial da snake 
             int indiceX = initialPoint.x() + (oppositeDX * i);
             int indiceY = initialPoint.y() + (oppositeDY * i);
 
-            this.snakeBody.addLast(new Point(indiceX, indiceY));
+            this.snakeBody.addLast(new Point(indiceX, indiceY)); 
         }
     }
 
@@ -64,8 +64,7 @@ public class Snake {
         }
     }
 
-    // get methods
-    private Point getHeadSnake() {
+    public Point getHeadSnake() {
         return snakeBody.getFirst();
     }
 
@@ -88,14 +87,5 @@ public class Snake {
     // collisions verifiers 
     public boolean selfCollision() {
         return snakeBody.stream().skip(1).anyMatch(pedaco -> pedaco.equals(getHeadSnake()));
-    }
-
-    public boolean collisionWithWall(int widthScreen, int heightScreen) {
-        return getHeadSnake().x() < 0 || getHeadSnake().x() >= widthScreen
-                || getHeadSnake().y() < 0 || getHeadSnake().y() >= heightScreen;
-    }
-
-    public boolean isSnakeDead(int width, int height) {
-        return selfCollision() || collisionWithWall(width, height);
     }
 }
